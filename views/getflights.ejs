@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/logo.ico" type="image/x-icon" sizes="any">
+  <!-- <link href="../dist/styles.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Air Connect - Get Flights</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
+
+</head>
+
+<body>
+  <header class="absolute inset-x-0 top-0 z-50">
+    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex lg:flex-1">
+        <a href="/get-flights" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <img class="h-20 w-auto" src="/images/plane-logo.jpeg" alt="">
+        </a>
+      </div>
+      <div class="flex lg:hidden">
+        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+      <div class="hidden lg:flex lg:gap-x-12">
+        <a href="/get-flights" class="text-lg font-semibold leading-6 text-gray-900">Get Flights</a>
+        <a href="/how-it-works" class="text-lg font-semibold leading-6 text-gray-900">How it works?</a>
+        <a href="/airlines" class="text-lg font-semibold leading-6 text-gray-900">Airlines</a>
+        <a href="/faqs" class="text-lg font-semibold leading-6 text-gray-900">FAQs</a>
+      </div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-2">
+        <a href="/dashboard" class="text-lg font-semibold bg-blue-500 leading-5 px-3 py-2 border border-white hover:bg-blue-600 rounded-md text-white"><%= userPassingData.username %>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <form action="/logout" method="post">
+          <button type="submit" class="text-lg font-semibold bg-black leading-5 px-3 py-2 border border-white hover:bg-gray-800 rounded-md text-white">Logout</button>
+        </form>
+      </div>
+    </nav>
+    <!-- Mobile menu, show/hide based on menu open state. -->
+    <div class="lg:hidden" role="dialog" aria-modal="true">
+      <!-- Background backdrop, show/hide based on slide-over state. -->
+      <div class="fixed inset-0 z-50"></div>
+      <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-72 sm:ring-1 sm:ring-gray-900/10">
+        <div class="flex items-center justify-between">
+          <a href="/get-flights" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            <img class="h-16 w-auto" src="/images/plane-logo.jpeg" alt="">
+          </a>
+          <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              <a href="/get-flights" class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Get
+                Flights</a>
+              <a href="/how-it-works" class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">How
+                it works?</a>
+              <a href="/airlines" class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Airlines</a>
+              <a href="/faqs" class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">FAQs</a>
+            </div>
+            <div class="py-6">
+              <a href="/dashboard" class="text-lg font-semibold bg-blue-500 leading-5 px-3 py-2 border border-white hover:bg-blue-600 rounded-md text-white mb-2 lg:mb-0"><%= userPassingData.username %>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+              <form action="/logout" method="post">
+                <button type="submit" class="text-lg font-semibold bg-black leading-5 px-3 py-2 border border-white hover:bg-gray-800 rounded-md text-white mb-2 lg:mb-0">Logout</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="relative isolate px-6 pt-20 lg:px-8">
+    <!-- <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+            aria-hidden="true">
+            <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#fcb8d4] to-[#dcdaf7] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+            </div>
+        </div> -->
+
+    <section class="mt-20 dark:bg-gray-900">
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <a href="#" class="flex text-center justify-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+              <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
+              Route Finder
+            </a>
+            <!-- <form class="space-y-4 md:space-y-6" action="/find-route" method="POST"> -->
+            <!-- Source Airport -->
+            <div>
+              <label for="source" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Source
+                Airport</label>
+              <select name="source" id="source" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                <option value="" disabled selected>Select your airport</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Cochin">Cochin</option>
+                <option value="Guwahati">Guwahati</option>
+                <option value="Bhubaneswar">Bhubaneswar</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Patna">Patna</option>
+                <option value="Indore">Indore</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Goa">Goa</option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Varanasi">Varanasi</option>
+              </select>
+            </div>
+
+            <!-- Destination Airport -->
+            <div>
+              <label for="destination" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Destination
+                Airport</label>
+              <select name="destination" id="destination" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                <option value="" disabled selected>Select your airport</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Cochin">Cochin</option>
+                <option value="Guwahati">Guwahati</option>
+                <option value="Bhubaneswar">Bhubaneswar</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Patna">Patna</option>
+                <option value="Indore">Indore</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Goa">Goa</option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Varanasi">Varanasi</option>
+              </select>
+            </div>
+
+            <!-- Priority Selection -->
+            <!-- <div>
+                                <label for="priority"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
+                                <select name="priority" id="priority"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required>
+                                    <option value="" disabled selected>Select priority</option>
+                                    <option value="less-time">Time</option>
+                                    <option value="low-cost">Cost</option>
+                                </select>
+                            </div> -->
+
+            <!-- Submit Button -->
+            <button onclick="findShortestPath()" class="w-full text-white bg-sky-400 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">Find
+              Shortest Path</button>
+            <!-- <button type="submit"
+                                class="w-full text-white bg-sky-400 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">Search
+                                Flights</button> -->
+            <!-- </form> -->
+          </div>
+
+          <div class="result p-5" id="result"></div>
+
+          <!-- Graph Visualization -->
+          <div id="network" class="p-5"></div>
+        </div>
+      </div>
+    </section>
+    <!-- <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+            aria-hidden="true">
+            <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#fcb8d4] to-[#dcdaf7] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+                style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+            </div>
+        </div> -->
+
+  </div>
+
+
+  <script>
+    const mobileMenuButton = document.querySelector('button[type="button"]');
+    const mobileMenu = document.querySelector('.lg\\:hidden[role="dialog"]');
+    const closeMenuButton = mobileMenu.querySelector('button[type="button"]');
+
+    // Toggle the visibility of the mobile menu
+    function toggleMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+
+    // Add event listeners
+    mobileMenuButton.addEventListener('click', toggleMenu);
+    closeMenuButton.addEventListener('click', toggleMenu);
+
+    const indiaAirportGraph = {
+      'Delhi': {
+        'Mumbai': {
+          time: 135,
+          cost: 5000
+        },
+        'Bangalore': {
+          time: 155,
+          cost: 5500
+        },
+        'Lucknow': {
+          time: 55,
+          cost: 2000
+        },
+        'Chandigarh': {
+          time: 45,
+          cost: 1500
+        }
+      },
+      'Mumbai': {
+        'Delhi': {
+          time: 135,
+          cost: 5000
+        },
+        'Hyderabad': {
+          time: 75,
+          cost: 3000
+        },
+        'Chennai': {
+          time: 95,
+          cost: 3500
+        },
+        'Ahmedabad': {
+          time: 50,
+          cost: 2500
+        }
+      },
+      'Bangalore': {
+        'Delhi': {
+          time: 155,
+          cost: 5500
+        },
+        'Hyderabad': {
+          time: 65,
+          cost: 2500
+        },
+        'Cochin': {
+          time: 50,
+          cost: 2000
+        },
+        'Pune': {
+          time: 80,
+          cost: 3000
+        }
+      },
+      'Hyderabad': {
+        'Mumbai': {
+          time: 75,
+          cost: 3000
+        },
+        'Bangalore': {
+          time: 65,
+          cost: 2500
+        },
+        'Chennai': {
+          time: 60,
+          cost: 2200
+        },
+        'Nagpur': {
+          time: 60,
+          cost: 2000
+        }
+      },
+      'Chennai': {
+        'Mumbai': {
+          time: 95,
+          cost: 3500
+        },
+        'Hyderabad': {
+          time: 60,
+          cost: 2200
+        },
+        'Kolkata': {
+          time: 110,
+          cost: 4000
+        },
+        'Bhubaneswar': {
+          time: 75,
+          cost: 3200
+        }
+      },
+      'Kolkata': {
+        'Chennai': {
+          time: 110,
+          cost: 4000
+        },
+        'Bhubaneswar': {
+          time: 45,
+          cost: 1800
+        },
+        'Guwahati': {
+          time: 70,
+          cost: 3000
+        },
+        'Patna': {
+          time: 50,
+          cost: 2000
+        }
+      },
+      'Ahmedabad': {
+        'Mumbai': {
+          time: 50,
+          cost: 2500
+        },
+        'Pune': {
+          time: 60,
+          cost: 2700
+        },
+        'Indore': {
+          time: 70,
+          cost: 2800
+        },
+        'Goa': {
+          time: 80,
+          cost: 3500
+        }
+      },
+      'Pune': {
+        'Bangalore': {
+          time: 80,
+          cost: 3000
+        },
+        'Ahmedabad': {
+          time: 60,
+          cost: 2700
+        },
+        'Jaipur': {
+          time: 95,
+          cost: 3700
+        },
+        'Goa': {
+          time: 75,
+          cost: 3200
+        }
+      },
+      'Jaipur': {
+        'Pune': {
+          time: 95,
+          cost: 3700
+        },
+        'Lucknow': {
+          time: 75,
+          cost: 3000
+        },
+        'Chandigarh': {
+          time: 60,
+          cost: 2700
+        },
+        'Delhi': {
+          time: 55,
+          cost: 2000
+        }
+      },
+      'Lucknow': {
+        'Delhi': {
+          time: 55,
+          cost: 2000
+        },
+        'Jaipur': {
+          time: 75,
+          cost: 3000
+        },
+        'Varanasi': {
+          time: 45,
+          cost: 1500
+        },
+        'Patna': {
+          time: 55,
+          cost: 2500
+        }
+      },
+      'Cochin': {
+        'Bangalore': {
+          time: 50,
+          cost: 2000
+        },
+        'Goa': {
+          time: 60,
+          cost: 2500
+        },
+        'Chennai': {
+          time: 80,
+          cost: 3500
+        },
+        'Kolkata': {
+          time: 120,
+          cost: 4500
+        }
+      },
+      'Guwahati': {
+        'Kolkata': {
+          time: 70,
+          cost: 3000
+        },
+        'Bhubaneswar': {
+          time: 85,
+          cost: 3500
+        },
+        'Patna': {
+          time: 75,
+          cost: 3000
+        },
+        'Srinagar': {
+          time: 115,
+          cost: 5000
+        }
+      },
+      'Bhubaneswar': {
+        'Kolkata': {
+          time: 45,
+          cost: 1800
+        },
+        'Chennai': {
+          time: 75,
+          cost: 3200
+        },
+        'Guwahati': {
+          time: 85,
+          cost: 3500
+        },
+        'Hyderabad': {
+          time: 105,
+          cost: 4500
+        }
+      },
+      'Chandigarh': {
+        'Delhi': {
+          time: 45,
+          cost: 1500
+        },
+        'Jaipur': {
+          time: 60,
+          cost: 2700
+        },
+        'Indore': {
+          time: 75,
+          cost: 3200
+        },
+        'Srinagar': {
+          time: 90,
+          cost: 4000
+        }
+      },
+      'Patna': {
+        'Kolkata': {
+          time: 50,
+          cost: 2000
+        },
+        'Lucknow': {
+          time: 55,
+          cost: 2500
+        },
+        'Guwahati': {
+          time: 75,
+          cost: 3000
+        },
+        'Varanasi': {
+          time: 60,
+          cost: 2800
+        }
+      },
+      'Indore': {
+        'Ahmedabad': {
+          time: 70,
+          cost: 2800
+        },
+        'Chandigarh': {
+          time: 75,
+          cost: 3200
+        },
+        'Nagpur': {
+          time: 90,
+          cost: 4000
+        },
+        'Goa': {
+          time: 90,
+          cost: 3700
+        }
+      },
+      'Nagpur': {
+        'Hyderabad': {
+          time: 60,
+          cost: 2000
+        },
+        'Indore': {
+          time: 90,
+          cost: 4000
+        },
+        'Mumbai': {
+          time: 75,
+          cost: 3500
+        },
+        'Goa': {
+          time: 85,
+          cost: 3200
+        }
+      },
+      'Goa': {
+        'Pune': {
+          time: 75,
+          cost: 3200
+        },
+        'Indore': {
+          time: 90,
+          cost: 3700
+        },
+        'Cochin': {
+          time: 60,
+          cost: 2500
+        },
+        'Ahmedabad': {
+          time: 80,
+          cost: 3500
+        }
+      },
+      'Srinagar': {
+        'Chandigarh': {
+          time: 90,
+          cost: 4000
+        },
+        'Guwahati': {
+          time: 115,
+          cost: 5000
+        },
+        'Delhi': {
+          time: 60,
+          cost: 2800
+        },
+        'Patna': {
+          time: 100,
+          cost: 4500
+        }
+      },
+      'Varanasi': {
+        'Lucknow': {
+          time: 45,
+          cost: 1500
+        },
+        'Patna': {
+          time: 60,
+          cost: 2800
+        },
+        'Delhi': {
+          time: 75,
+          cost: 3500
+        },
+        'Hyderabad': {
+          time: 90,
+          cost: 4000
+        }
+      }
+    };
+
+
+    // Updated Dijkstra's algorithm to find the shortest path considering intermediate nodes
+    function dijkstra(source, destination) {
+      const costs = {};
+      const times = {};
+      const previous = {};
+      const queue = new Set();
+
+      // Initialize all airports with infinity costs and times
+      for (const airport in indiaAirportGraph) {
+        costs[airport] = Infinity;
+        times[airport] = Infinity;
+        previous[airport] = null;
+        queue.add(airport);
+      }
+
+      // Start with the source airport
+      costs[source] = 0;
+      times[source] = 0;
+
+      while (queue.size) {
+        // Find the airport with the lowest cost
+        const current = [...queue].reduce((minNode, node) => {
+          return costs[node] < costs[minNode] ? node : minNode;
+        }, [...queue][0]);
+
+        // If we reached the destination, construct the path
+        if (current === destination) {
+          const path = [];
+          let temp = destination;
+          while (temp) {
+            path.unshift(temp);
+            temp = previous[temp];
+          }
+          return {
+            path,
+            time: times[destination],
+            cost: costs[destination],
+          };
+        }
+
+        // Remove the current airport from the queue
+        queue.delete(current);
+
+        // Explore all neighbors (connected airports) of the current airport
+        for (const neighbor in indiaAirportGraph[current]) {
+          const travelInfo = indiaAirportGraph[current][neighbor];
+          const newCost = costs[current] + travelInfo.cost;
+          const newTime = times[current] + travelInfo.time;
+
+          // If the new cost is lower, update the neighbor's cost and time
+          if (newCost < costs[neighbor]) {
+            costs[neighbor] = newCost;
+            times[neighbor] = newTime;
+            previous[neighbor] = current;
+          }
+        }
+      }
+
+      // If no path was found, return null (but this case should never occur in a fully connected graph)
+      return null;
+    }
+
+    // Function to find the shortest path and display the result
+    function findShortestPath() {
+      const source = document.getElementById("source").value;
+      const destination = document.getElementById("destination").value;
+
+      const result = dijkstra(source, destination);
+
+      const resultDiv = document.getElementById("result");
+      if (result) {
+        resultDiv.innerHTML = `<strong>Travel Time:</strong> ${result.time} minutes<br><strong>Cost:</strong> ₹${result.cost}`;
+        drawGraph(result.path);
+      } else {
+        resultDiv.innerHTML = 'No path found.';
+      }
+    }
+
+    // Function to visualize the route on the graph
+    function drawGraph(path) {
+      const nodes = new vis.DataSet();
+      const edges = new vis.DataSet();
+      const uniqueAirports = new Set(path);
+
+      // Add nodes for the path
+      uniqueAirports.forEach((airport) => {
+        nodes.add({
+          id: airport,
+          label: airport
+        });
+      });
+
+      // Add edges for the path
+      for (let i = 0; i < path.length - 1; i++) {
+        edges.add({
+          from: path[i],
+          to: path[i + 1]
+        });
+      }
+
+      const container = document.getElementById("network");
+      const data = {
+        nodes,
+        edges
+      };
+      const options = {
+        edges: {
+          arrows: 'to'
+        }
+      };
+      const network = new vis.Network(container, data, options);
+    }
+  </script>
+
+</body>
+
+</html>

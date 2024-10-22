@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/images/logo.ico" type="image/x-icon" sizes="any">
+    <!-- <link href="../dist/styles.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Air Connect - Airlines</title>
+</head>
+
+<body>
+    <div class="overflow-hidden bg-white py-24 sm:py-32">
+        <header class="absolute inset-x-0 top-0 z-50">
+            <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div class="flex lg:flex-1">
+                    <a href="/airlines" class="-m-1.5 p-1.5">
+                        <span class="sr-only">Your Company</span>
+                        <img class="h-20 w-auto" src="/images/plane-logo.jpeg" alt="">
+                    </a>
+                </div>
+                <div class="flex lg:hidden">
+                    <button type="button"
+                        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" data-slot="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="/get-flights" class="text-lg font-semibold leading-6 text-gray-900">Get Flights</a>
+                    <a href="/how-it-works" class="text-lg font-semibold leading-6 text-gray-900">How it works?</a>
+                    <a href="/airlines" class="text-lg font-semibold leading-6 text-gray-900">Airlines</a>
+                    <a href="/faqs" class="text-lg font-semibold leading-6 text-gray-900">FAQs</a>
+                </div>
+                <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-2">
+                    <a href="/dashboard"
+                        class="text-lg font-semibold bg-blue-500 leading-5 px-3 py-2 border border-white hover:bg-blue-600 rounded-md text-white"><%= userPassingData.username %>
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                    <form action="/logout" method="post">
+                        <button type="submit"
+                            class="text-lg font-semibold bg-black leading-5 px-3 py-2 border border-white hover:bg-gray-800 rounded-md text-white">Logout</button>
+                    </form>
+                </div>
+            </nav>
+            <!-- Mobile menu, show/hide based on menu open state. -->
+            <div class="lg:hidden" role="dialog" aria-modal="true">
+                <!-- Background backdrop, show/hide based on slide-over state. -->
+                <div class="fixed inset-0 z-50"></div>
+                <div
+                    class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-72 sm:ring-1 sm:ring-gray-900/10">
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="-m-1.5 p-1.5">
+                            <span class="sr-only">Your Company</span>
+                            <img class="h-16 w-auto" src="/images/plane-logo.jpeg" alt="">
+                        </a>
+                        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+                            <span class="sr-only">Close menu</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mt-6 flow-root">
+                        <div class="-my-6 divide-y divide-gray-500/10">
+                            <div class="space-y-2 py-6">
+                                <a href="/get-flights"
+                                    class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Get
+                                    Flights</a>
+                                <a href="/how-it-works"
+                                    class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">How
+                                    it works?</a>
+                                <a href="/airlines"
+                                    class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Airlines</a>
+                                <a href="/faqs"
+                                    class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">FAQs</a>
+                            </div>
+                            <div class="py-6">
+                                <a href="/dashboard"
+                                    class="text-lg font-semibold bg-blue-500 leading-5 px-3 py-2 border border-white hover:bg-blue-600 rounded-md text-white"><%= userPassingData.username %>
+                                    <span aria-hidden="true">&rarr;</span>
+                                </a>
+                                <form action="/logout" method="post">
+                                    <button type="submit"
+                                        class="text-lg font-semibold bg-black leading-5 px-3 py-2 border border-white hover:bg-gray-800 rounded-md text-white">Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 mt-10">
+            <div
+                class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+                <!-- Airline 1: Emirates -->
+                <div class="lg:pr-8 lg:pt-4">
+                    <div class="lg:max-w-lg">
+                        <h2 class="text-base font-semibold leading-7 text-indigo-600">Fly with Luxury</h2>
+                        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Emirates Airlines
+                        </p>
+                        <p class="mt-6 text-lg leading-8 text-gray-600">Emirates Airlines, based in Dubai, offers an
+                            unparalleled travel experience. Known for its luxurious amenities and exceptional service,
+                            Emirates ensures that every journey is memorable.</p>
+                        <dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                            <div class="relative pl-9">
+                                <dt class="inline font-semibold text-gray-900">
+                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Luxury Experience.
+                                </dt>
+                                <dd class="inline">Experience award-winning service and unparalleled comfort with
+                                    Emirates, from onboard entertainment to gourmet meals.</dd>
+                            </div>
+                            <div class="relative pl-9">
+                                <dt class="inline font-semibold text-gray-900">
+                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Extensive Network.
+                                </dt>
+                                <dd class="inline">Fly to over 150 destinations across six continents with ease,
+                                    connecting through Dubai's world-class hub.</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+                <img src="/images/Emirates.webp" alt="Emirates Airlines"
+                    class="w-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-16 md:-ml-4 lg:-ml-0"
+                    width="2432" height="1442">
+
+                <!-- Airline 3: Southwest Airlines -->
+                <img src="/images/etihad.avif" alt="Southwest Airlines"
+                    class="w-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-10 md:-ml-4 lg:-ml-0"
+                    width="2432" height="1442">
+                <div class="lg:pr-8 lg:pt-4 mx-5">
+                    <div class="lg:max-w-lg">
+                        <h2 class="text-base font-semibold leading-7 text-indigo-600">Affordable Air Travel</h2>
+                        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Etihad Airlines
+                        </p>
+                        <p class="mt-6 text-lg leading-8 text-gray-600">Southwest Airlines, the largest low-cost carrier
+                            in the United States, is known for its commitment to providing affordable air travel without
+                            compromising on quality. They focus on customer satisfaction and operational efficiency.</p>
+                        <dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                            <div class="relative pl-9">
+                                <dt class="inline font-semibold text-gray-900">
+                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    No Hidden Fees.
+                                </dt>
+                                <dd class="inline">Southwest Airlines offers transparent pricing with no hidden fees,
+                                    ensuring travelers know exactly what they're paying for.</dd>
+                            </div>
+                            <div class="relative pl-9">
+                                <dt class="inline font-semibold text-gray-900">
+                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Flexible Booking.
+                                </dt>
+                                <dd class="inline">Book your flight with confidence knowing that Southwest offers
+                                    flexible booking options, including free cancellations and changes.</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Airline 2: Delta Airlines -->
+                <div class="lg:pr-8 lg:pt-4">
+                    <div class="lg:max-w-lg">
+                        <h2 class="text-base font-semibold leading-7 text-indigo-600">Travel Smart</h2>
+                        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Delta Airlines</p>
+                        <p class="mt-6 text-lg leading-8 text-gray-600">Delta Airlines is one of the world’s leading
+                            airlines, recognized for its commitment to customer satisfaction and operational excellence.
+                            With a vast domestic and international network, Delta connects travelers to their
+                            destinations seamlessly.</p>
+                        <dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                            <div class="relative pl-9">
+                                <dt class="inline font-semibold text-gray-900">
+                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Exceptional Service.
+                                </dt>
+                                <dd class="inline">Delta Airlines is known for its attentive and friendly staff,
+                                    ensuring a pleasant travel experience from check-in to landing.</dd>
+                            </div>
+                            <div class="relative pl-9">
+                                <dt class="inline font-semibold text-gray-900">
+                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Innovation.
+                                </dt>
+                                <dd class="inline">Delta Airlines invests in modern technology and innovative solutions,
+                                    enhancing the travel experience for customers.</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+                <img src="/images/delta.jpg" alt="Delta Airlines"
+                    class="w-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-16 md:-ml-4 lg:-ml-0"
+                    width="2432" height="1442">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mobileMenuButton = document.querySelector('button[type="button"]');
+        const mobileMenu = document.querySelector('.lg\\:hidden[role="dialog"]');
+        const closeMenuButton = mobileMenu.querySelector('button[type="button"]');
+
+        // Toggle the visibility of the mobile menu
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Add event listeners
+        mobileMenuButton.addEventListener('click', toggleMenu);
+        closeMenuButton.addEventListener('click', toggleMenu);
+    </script>
+
+</body>
+
+</html>

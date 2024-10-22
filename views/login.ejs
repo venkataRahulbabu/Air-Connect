@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/logo.ico" type="image/x-icon" sizes="any">
+  <title>Register - Air Connect</title>
+  <link href="../dist/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div>
+    <div class="flex min-h-screen flex-col">
+      <div class="container flex items-center justify-between py-4 mx-auto">
+        <div class="sm:text-2xl lg:text-3xl font-bold text-blue-500">
+          Air Connect
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="flex items-center justify-center h-9 w-9 bg-white border border-gray-300 rounded-md transition-transform focus:outline-none dark:bg-gray-800 dark:border-slate-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-gray-800 transition-transform">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+            <span class="sr-only">Toggle theme</span>
+          </button>
+          <a href="/register" class="inline-flex items-center justify-center text-md text-slate-200 font-medium ring-offset-background transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-blue-400 dark:text-white text-primary-foreground hover:bg-blue-500 h-9 rounded-md px-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="mr-2 h-4 w-4">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+              <polyline points="10 17 15 12 10 7"></polyline>
+              <line x1="15" x2="3" y1="12" y2="12"></line>
+            </svg>
+            Register
+          </a>
+        </div>
+      </div>
+      <div class="bg-white shadow">
+        <div class="flex flex-col items-center justify-center mb-4">
+          <div>
+            <a class="items-center gap-2" href="/">
+              <img src="/images/plane-logo.jpeg" class="h-32 w-40 object-contain" alt="Logo" />
+            </a>
+          </div>
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-sm">
+            <div class="flex flex-col space-y-1 p-5">
+              <h2 class="my-1 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                Sign in to your account
+              </h2>
+            </div>
+            <div class="p-6 pt-0">
+              <form class="flex flex-col gap-4" action="/" method="POST">
+                <div class="space-y-2">
+                  <label class="text-sm font-medium leading-none" for="email">Email</label>
+                  <input type="email" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1" placeholder="Enter your email" name="email" id="email" required />
+                </div>
+                <div class="space-y-2">
+                  <label class="text-sm font-medium leading-none" for="password">Password</label>
+                  <input type="password" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1" placeholder="Enter your password" name="password" id="password" required />
+                </div>
+                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-blue-400 text-white hover:bg-blue-500 h-10 px-4" type="submit">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
