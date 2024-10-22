@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/images/logo.ico" type="image/x-icon" sizes="any">
+    <link rel="icon" href="/images/logo.ico" type="image/x-icon" sizes="any">
     <!-- <link href="../dist/styles.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -45,8 +45,9 @@
                 </div>
                 <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-2">
                     <a href="/dashboard"
-                        class="text-lg font-semibold bg-blue-500 leading-5 px-3 py-2 border border-white hover:bg-blue-600 rounded-md text-white"><%= userPassingData.username %>
-                        <span aria-hidden="true">&rarr;</span>
+                        class="text-lg font-semibold bg-blue-500 leading-5 px-3 py-2 border border-white hover:bg-blue-600 rounded-md text-white">
+                        <%= userPassingData.username %>
+                            <span aria-hidden="true">&rarr;</span>
                     </a>
                     <form action="/logout" method="post">
                         <button type="submit"
@@ -55,15 +56,15 @@
                 </div>
             </nav>
             <!-- Mobile menu, show/hide based on menu open state. -->
-            <div class="lg:hidden" role="dialog" aria-modal="true">
+            <div class="lg:hidden hidden" role="dialog" aria-modal="true">
                 <!-- Background backdrop, show/hide based on slide-over state. -->
                 <div class="fixed inset-0 z-50"></div>
                 <div
                     class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-72 sm:ring-1 sm:ring-gray-900/10">
                     <div class="flex items-center justify-between">
-                        <a href="#" class="-m-1.5 p-1.5">
+                        <a href="/airlines" class="-m-1.5 p-1.5">
                             <span class="sr-only">Your Company</span>
-                            <img class="h-16 w-auto" src="/images/plane-logo.jpeg" alt="">
+                            <img class="h-20 w-auto" src="/images/plane-logo.jpeg" alt="">
                         </a>
                         <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
                             <span class="sr-only">Close menu</span>
@@ -87,14 +88,18 @@
                                 <a href="/faqs"
                                     class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">FAQs</a>
                             </div>
-                            <div class="py-6">
-                                <a href="/dashboard"
-                                    class="text-lg font-semibold bg-blue-500 leading-5 px-3 py-2 border border-white hover:bg-blue-600 rounded-md text-white"><%= userPassingData.username %>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
+                            <div class="py-6 flex flex-col space-y-4">
+                                <form action="/dashboard" method="get">
+                                    <button type="submit"
+                                        class="text-lg font-semibold bg-blue-500 px-3 py-2 rounded-md text-white hover:bg-blue-600">
+                                        <%= userPassingData.username %> <span aria-hidden="true">&rarr;</span>
+                                    </button>
+                                </form>
                                 <form action="/logout" method="post">
                                     <button type="submit"
-                                        class="text-lg font-semibold bg-black leading-5 px-3 py-2 border border-white hover:bg-gray-800 rounded-md text-white">Logout</button>
+                                        class="text-lg font-semibold bg-black px-3 py-2 rounded-md text-white hover:bg-gray-800">
+                                        Logout
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -145,13 +150,13 @@
                         </dl>
                     </div>
                 </div>
-                <img src="/images/Emirates.webp" alt="Emirates Airlines"
-                    class="w-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-16 md:-ml-4 lg:-ml-0"
+                <img src="/images/emirates.jpeg" alt="Emirates Airlines"
+                    class="w-[24rem] h-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-16 md:-ml-4 lg:-ml-0"
                     width="2432" height="1442">
 
                 <!-- Airline 3: Southwest Airlines -->
                 <img src="/images/etihad.avif" alt="Southwest Airlines"
-                    class="w-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-10 md:-ml-4 lg:-ml-0"
+                    class="w-[24rem] h-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-10 md:-ml-4 lg:-ml-0"
                     width="2432" height="1442">
                 <div class="lg:pr-8 lg:pt-4 mx-5">
                     <div class="lg:max-w-lg">
@@ -232,7 +237,7 @@
                     </div>
                 </div>
                 <img src="/images/delta.jpg" alt="Delta Airlines"
-                    class="w-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-16 md:-ml-4 lg:-ml-0"
+                    class="w-[24rem] h-[24rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[36rem] mt-16 md:-ml-4 lg:-ml-0"
                     width="2432" height="1442">
 
             </div>
@@ -240,16 +245,22 @@
     </div>
 
     <script>
+        // Select DOM elements
         const mobileMenuButton = document.querySelector('button[type="button"]');
         const mobileMenu = document.querySelector('.lg\\:hidden[role="dialog"]');
         const closeMenuButton = mobileMenu.querySelector('button[type="button"]');
+
+        // Ensure the mobile menu is hidden on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            mobileMenu.classList.add('hidden');
+        });
 
         // Toggle the visibility of the mobile menu
         function toggleMenu() {
             mobileMenu.classList.toggle('hidden');
         }
 
-        // Add event listeners
+        // Add event listeners for open and close actions
         mobileMenuButton.addEventListener('click', toggleMenu);
         closeMenuButton.addEventListener('click', toggleMenu);
     </script>

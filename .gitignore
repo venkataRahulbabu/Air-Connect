@@ -10,3 +10,4 @@ tailwind.config.js
 # Environment file
 .env
 # .vercel
+.vercel
