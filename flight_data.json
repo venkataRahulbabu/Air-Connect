@@ -1,0 +1,107 @@
+{
+  "Hyderabad": [
+    { "destination": "Bengaluru", "cost": 2000, "time_taken": 180 },
+    { "destination": "Chennai", "cost": 2500, "time_taken": 120 },
+    { "destination": "Mumbai", "cost": 3000, "time_taken": 90 },
+    { "destination": "Kolkata", "cost": 4500, "time_taken": 150 },
+    { "destination": "Pune", "cost": 3500, "time_taken": 180 }
+  ],
+  "Bengaluru": [
+    { "destination": "Hyderabad", "cost": 2200, "time_taken": 180 },
+    { "destination": "Chennai", "cost": 1800, "time_taken": 45 },
+    { "destination": "Mumbai", "cost": 3500, "time_taken": 100 },
+    { "destination": "Goa", "cost": 2200, "time_taken": 60 },
+    { "destination": "Kolkata", "cost": 2700, "time_taken": 90 }
+  ],
+  "Mumbai": [
+    { "destination": "Delhi", "cost": 5000, "time_taken": 120 },
+    { "destination": "Hyderabad", "cost": 3100, "time_taken": 90 },
+    { "destination": "Bengaluru", "cost": 3400, "time_taken": 100 },
+    { "destination": "Chennai", "cost": 3600, "time_taken": 120 },
+    { "destination": "Pune", "cost": 1000, "time_taken": 30 }
+  ],
+  "Delhi": [
+    { "destination": "Mumbai", "cost": 4800, "time_taken": 120 },
+    { "destination": "Lucknow", "cost": 1600, "time_taken": 50 },
+    { "destination": "Chennai", "cost": 4500, "time_taken": 180 },
+    { "destination": "Kolkata", "cost": 3700, "time_taken": 150 },
+    { "destination": "Jaipur", "cost": 1400, "time_taken": 70 }
+  ],
+  "Chennai": [
+    { "destination": "Hyderabad", "cost": 2400, "time_taken": 120 },
+    { "destination": "Bengaluru", "cost": 1700, "time_taken": 45 },
+    { "destination": "Mumbai", "cost": 3600, "time_taken": 120 },
+    { "destination": "Kolkata", "cost": 2900, "time_taken": 90 },
+    { "destination": "Jaipur", "cost": 4000, "time_taken": 180 }
+  ],
+  "Kolkata": [
+    { "destination": "Delhi", "cost": 3800, "time_taken": 150 },
+    { "destination": "Mumbai", "cost": 4100, "time_taken": 150 },
+    { "destination": "Bengaluru", "cost": 3700, "time_taken": 180 },
+    { "destination": "Chennai", "cost": 2900, "time_taken": 90 },
+    { "destination": "Lucknow", "cost": 3000, "time_taken": 100 }
+  ],
+  "Jaipur": [
+    { "destination": "Delhi", "cost": 1400, "time_taken": 70 },
+    { "destination": "Mumbai", "cost": 3200, "time_taken": 90 },
+    { "destination": "Chennai", "cost": 4000, "time_taken": 180 },
+    { "destination": "Kolkata", "cost": 3100, "time_taken": 150 },
+    { "destination": "Lucknow", "cost": 2500, "time_taken": 80 }
+  ],
+  "Pune": [
+    { "destination": "Mumbai", "cost": 1000, "time_taken": 30 },
+    { "destination": "Hyderabad", "cost": 2200, "time_taken": 90 },
+    { "destination": "Bengaluru", "cost": 2900, "time_taken": 100 },
+    { "destination": "Goa", "cost": 1500, "time_taken": 40 },
+    { "destination": "Chennai", "cost": 2000, "time_taken": 80 }
+  ],
+  "Goa": [
+    { "destination": "Indore", "cost": 1700, "time_taken": 50 },
+    { "destination": "Bengaluru", "cost": 2500, "time_taken": 60 },
+    { "destination": "Pune", "cost": 1500, "time_taken": 40 },
+    { "destination": "Hyderabad", "cost": 2800, "time_taken": 90 },
+    { "destination": "Chennai", "cost": 2300, "time_taken": 70 }
+  ],
+  "Lucknow": [
+    { "destination": "Delhi", "cost": 1700, "time_taken": 50 },
+    { "destination": "Kolkata", "cost": 3000, "time_taken": 100 },
+    { "destination": "Jaipur", "cost": 2000, "time_taken": 80 },
+    { "destination": "Chennai", "cost": 2600, "time_taken": 90 },
+    { "destination": "Varanasi", "cost": 1900, "time_taken": 130 }
+  ],
+  "Indore": [
+    { "destination": "Jaipur", "cost": 2100, "time_taken": 80 },
+    { "destination": "Mumbai", "cost": 3300, "time_taken": 110 },
+    { "destination": "Hyderabad", "cost": 3100, "time_taken": 130 },
+    { "destination": "Bengaluru", "cost": 3200, "time_taken": 150 },
+    { "destination": "Pune", "cost": 2900, "time_taken": 100 }
+  ],
+  "Bhubaneswar": [
+    { "destination": "Kolkata", "cost": 1800, "time_taken": 40 },
+    { "destination": "Indore", "cost": 2100, "time_taken": 170 },
+    { "destination": "Chennai", "cost": 3000, "time_taken": 90 },
+    { "destination": "Hyderabad", "cost": 3500, "time_taken": 140 },
+    { "destination": "Varanasi", "cost": 4700, "time_taken": 180 }
+  ],
+  "Gannavaram": [
+    { "destination": "Chennai", "cost": 2800, "time_taken": 90 },
+    { "destination": "Hyderabad", "cost": 1500, "time_taken": 60 },
+    { "destination": "Mumbai", "cost": 4000, "time_taken": 150 },
+    { "destination": "Bhubaneswar", "cost": 2700, "time_taken": 120 },
+    { "destination": "Visakhapatnam", "cost": 1000, "time_taken": 50 }
+  ],
+  "Visakhapatnam": [
+    { "destination": "Bengaluru", "cost": 3300, "time_taken": 140 },
+    { "destination": "Gannavaram", "cost": 1000, "time_taken": 50 },
+    { "destination": "Bhubaneswar", "cost": 1900, "time_taken": 80 },
+    { "destination": "Mumbai", "cost": 4100, "time_taken": 170 },
+    { "destination": "Pune", "cost": 3100, "time_taken": 140 }
+  ],
+  "Varanasi": [
+    { "destination": "Delhi", "cost": 1900, "time_taken": 60 },
+    { "destination": "Kolkata", "cost": 2900, "time_taken": 110 },
+    { "destination": "Lucknow", "cost": 1700, "time_taken": 50 },
+    { "destination": "Jaipur", "cost": 3200, "time_taken": 100 },
+    { "destination": "Bhubaneswar", "cost": 3500, "time_taken": 130 }
+  ]
+}

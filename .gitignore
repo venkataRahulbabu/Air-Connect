@@ -1,0 +1,12 @@
+*.log
+# Node.js
+node_modules/
+
+# Project files
+package.json
+package-lock.json
+tailwind.config.js
+
+# Environment file
+.env
+# .vercel
