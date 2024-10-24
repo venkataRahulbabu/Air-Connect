@@ -6,6 +6,10 @@ node_modules/
 package.json
 package-lock.json
 tailwind.config.js
+vercel.json
+postcss.config.js
+manifest.json
+flight_data.json
 
 # Environment file
 .env
